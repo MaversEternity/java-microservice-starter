@@ -1,0 +1,42 @@
+databaseChangeLog:
+  - changeSet:
+      id: v1.0.0_202511160129_create_person_table
+      author: maxmavers@gmail.com
+      changes:
+        - createSequence:
+            sequenceName: person_id_seq
+            cycle: false
+            startValue: 1
+            cacheSize: 50
+            incrementBy: 1
+        - createTable:
+            tableName: person
+            remarks: Person info
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  remarks: Person id
+                  defaultValueSequenceNext: person_id_seq
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar
+                  remarks: Person name
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: timestamp without time zone
+                  remarks: Creation time
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: timestamp without time zone
+                  remarks: Last modification time
+        - sqlFile:
+            path: db/changelog/v1.0.0/import/init-system-admin.sql
+            splitStatements: false

@@ -1,0 +1,26 @@
+package com.me.mapper;
+
+import java.util.List;
+import java.util.stream.Stream;
+
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
+
+import com.me.db.entity.TaskEntity;
+import com.me.transport.controller.model.TaskRq;
+import com.me.transport.controller.model.TaskRs;
+
+@Mapper(componentModel = "spring", uses = {JpaRefMapper.class})
+public interface TaskMapper {
+
+    TaskRs to(TaskEntity task);
+
+    List<TaskRs> to(Stream<TaskEntity> task);
+
+    @Mapping(target = "assignee", source = "assignedBy")
+    TaskEntity to(TaskRq rq);
+
+    TaskEntity update(@MappingTarget TaskEntity entity, TaskRq task);
+
+}

@@ -1,0 +1,15 @@
+version: "3.3"
+
+services:
+  planner-db:
+    image: 'postgres:18.1'
+    environment:
+      POSTGRES_DB: planner
+      POSTGRES_USER: planner
+      POSTGRES_PASSWORD: planner
+    ports:
+      - 5432:5432
+
+volumes:
+  postgres_data:
+    driver: local
