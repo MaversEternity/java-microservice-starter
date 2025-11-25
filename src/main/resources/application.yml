@@ -1,0 +1,75 @@
+server:
+  port: 8080
+  http2:
+    enabled: true
+  forward-headers-strategy: FRAMEWORK
+  servlet:
+    context-path: /
+
+spring:
+  profiles:
+    active: ${ACTIVE_PROFILE:dev}
+  application:
+    name: planner
+  jackson:
+    default-property-inclusion: non_null
+  datasource:
+    url: ${DATASOURCE_URL:jdbc:postgresql://localhost:5432/planner?currentSchema=planner}
+    username: ${DATASOURCE_USERNAME:planner}
+    password: ${DATASOURCE_PASSWORD:planner}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      minimumIdle: 2
+  servlet:
+    multipart:
+      max-file-size: 1MB
+      max-request-size: 1MB
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate.jdbc.batch_size: 30
+      hibernate.temp.use_jdbc_metadata_defaults: false
+    open-in-view: false
+    database: postgresql
+  liquibase:
+    change-log: classpath:db/changelog/changelog_master.yaml
+    enabled: true
+
+management:
+  info:
+    env:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: info, health, httptrace, prometheus
+      base-path: /public/actuator
+  atlas:
+    metrics:
+      export:
+        enabled: false
+
+# swagger-ui custom path
+springdoc:
+  swagger-ui:
+    urlsPrimaryName: "planner"
+    use-root-path: true
+    tags-sorter: alpha
+    operations-sorter: alpha
+
+info:
+  application:
+    name: @project.name@
+    version: @project.version@
+    description: @project.description@
+
+logging:
+  level:
+    #    org.springframework.web: DEBUG
+    org.hibernate.SQL: DEBUG
+  #    org.springframework.orm.jpa: DEBUG
+  #    org.springframework.transaction: DEBUG
+  config: classpath:log/logback-spring.xml
+  format: ${LOGGING_FORMAT:text}

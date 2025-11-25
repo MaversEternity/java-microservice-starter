@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+  <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+
+  <springProperty name="appName" source="spring.application.name"/>
+  <springProperty name="format" source="logging.format"/>
+  <appender name="CONSOLE-JSON" class="ch.qos.logback.core.ConsoleAppender">
+    <filter class="ch.qos.logback.core.filter.EvaluatorFilter">
+      <evaluator class="ch.qos.logback.classic.boolex.OnMarkerEvaluator">
+        <marker>AUDIT</marker>
+      </evaluator>
+      <onMatch>DENY</onMatch>
+    </filter>
+    <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+      <providers>
+        <provider class="net.logstash.logback.composite.loggingevent.LogstashMarkersJsonProvider"/>
+        <pattern>
+          <pattern>
+            {
+            "level": "%level",
+            "service": "${appName}",
+            "thread": "%thread",
+            "logger": "%logger{40}",
+            "message": "%message"
+            }
+          </pattern>
+        </pattern>
+        <provider class="com.me.config.logging.JsonStackTraceProvider">
+          <throwableConverter class="net.logstash.logback.stacktrace.ShortenedThrowableConverter">
+            <maxDepthPerThrowable>2147483647</maxDepthPerThrowable>
+            <maxLength>2147483647</maxLength>
+            <shortenedClassNameLength>2147483647</shortenedClassNameLength>
+            <rootCauseFirst>true</rootCauseFirst>
+            <exclude>^net\.sf\.cglib\.proxy\.MethodProxy\.invoke</exclude>
+            <exclude>^java\.lang\.reflect\.Method\.invoke</exclude>
+            <exclude>^org\.springframework\.cglib\.</exclude>
+            <exclude>^org\.springframework\.app\.</exclude>
+          </throwableConverter>
+        </provider>
+      </providers>
+    </encoder>
+  </appender>
+  <root level="info">
+      <condition class="ch.qos.logback.core.boolex.PropertyEqualityCondition">
+          <key>format</key>
+          <value>json</value>
+      </condition>
+      <if>
+          <then>
+              <appender-ref ref="CONSOLE-JSON"/>
+          </then>
+          <else>
+              <appender-ref ref="CONSOLE"/>
+          </else>
+      </if>
+<!--      <if condition='property("format").equalsIgnoreCase("json")'>-->
+<!--          <then>-->
+<!--              &lt;!&ndash; Use the appender reference &ndash;&gt;-->
+<!--              <appender-ref ref="CONSOLE-JSON"/>-->
+<!--          </then>-->
+<!--          <else>-->
+<!--              <appender-ref ref="CONSOLE"/>-->
+<!--          </else>-->
+<!--      </if>-->
+  </root>
+</configuration>

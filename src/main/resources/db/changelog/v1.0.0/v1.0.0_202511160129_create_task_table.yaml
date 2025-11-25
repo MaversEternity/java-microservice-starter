@@ -1,0 +1,74 @@
+databaseChangeLog:
+  - changeSet:
+      id: v1.0.0_202511160129_create_task_table
+      author: maxmavers@gmail.com
+      changes:
+        - sqlFile:
+            path: db/changelog/v1.0.0/import/add-task-state-type.sql
+            splitStatements: false
+        - createSequence:
+            sequenceName: task_id_seq
+            cycle: false
+            startValue: 1
+            cacheSize: 50
+            incrementBy: 1
+        - createTable:
+            tableName: task
+            remarks: Task info
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  defaultValueSequenceNext: task_id_seq
+                  remarks: Task id
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: title
+                  type: varchar
+                  remarks: Task tittle
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar
+                  remarks: Task description
+              - column:
+                  name: state
+                  type: task_state
+                  remarks: Task state
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: timestamp without time zone
+                  remarks: Creation time
+                  constraints:
+                    nullable: false
+              - column:
+                  name: assigned_by
+                  type: bigint
+                  remarks: assignee reference
+                  constraints:
+                    references: person (id)
+                    foreignKeyName: task_assigned_by_to_person_fk
+              - column:
+                  name: updated_at
+                  type: timestamp without time zone
+                  remarks: Last modification time
+              - column:
+                  name: created_by
+                  type: bigint
+                  remarks: creator reference
+                  constraints:
+                    nullable: false
+                    references: person (id)
+                    foreignKeyName: task_created_by_to_person_fk
+              - column:
+                  name: updated_by
+                  type: bigint
+                  remarks: updater reference
+                  constraints:
+                    references: person (id)
+                    foreignKeyName: task_updated_by_to_person_fk
