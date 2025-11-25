@@ -54,14 +54,5 @@
               <appender-ref ref="CONSOLE"/>
           </else>
       </if>
-<!--      <if condition='property("format").equalsIgnoreCase("json")'>-->
-<!--          <then>-->
-<!--              &lt;!&ndash; Use the appender reference &ndash;&gt;-->
-<!--              <appender-ref ref="CONSOLE-JSON"/>-->
-<!--          </then>-->
-<!--          <else>-->
-<!--              <appender-ref ref="CONSOLE"/>-->
-<!--          </else>-->
-<!--      </if>-->
   </root>
 </configuration>
