@@ -36,6 +36,7 @@
         <instancio-junit.version>5.5.1</instancio-junit.version>
         <hibernate-maven-plugin.version>7.1.10.Final</hibernate-maven-plugin.version>
         <junit-vintage-engine.version>6.0.1</junit-vintage-engine.version>
+        <jacoco-maven-plugin.version>0.8.14</jacoco-maven-plugin.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -181,7 +182,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <argLine>
-                        -javaagent:${settings.localRepository}/org/mockito/mockito-core/${mockito.version}/mockito-core-${mockito.version}.jar
+                        @{argLine} -javaagent:${settings.localRepository}/org/mockito/mockito-core/${mockito.version}/mockito-core-${mockito.version}.jar
                     </argLine>
                 </configuration>
             </plugin>
@@ -247,5 +248,72 @@
             </plugins>
         </pluginManagement>
     </build>
+
+    <profiles>
+        <profile>
+            <id>dependency-check</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.owasp</groupId>
+                        <artifactId>dependency-check-maven</artifactId>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                                <configuration>
+                                    <!-- Configuration to only fail the build on CRITICAL vulnerabilities -->
+                                    <failBuildOnCVSS>9.0</failBuildOnCVSS>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>coverage</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.jacoco</groupId>
+                        <artifactId>jacoco-maven-plugin</artifactId>
+                        <version>${jacoco-maven-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>prepare-agent</id>
+                                <goals>
+                                    <goal>prepare-agent</goal>
+                                </goals>
+                            </execution>
+
+                            <execution>
+                                <id>report</id>
+                                <phase>test</phase>
+                                <goals>
+                                    <goal>report</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${project.reporting.outputDirectory}/jacoco</outputDirectory>
+                                    <excludes>
+
+                                        <exclude>**/config/**</exclude>
+                                        <exclude>**/entity/**</exclude>
+                                        <exclude>**/model/**</exclude>
+                                        <exclude>**/message/**</exclude>
+                                        <exclude>**/exceptions/**</exclude>
+                                        <exclude>**/request/*</exclude>
+                                        <exclude>**/response/*</exclude>
+                                        <exclude>**/dto/**</exclude>
+                                    </excludes>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>
