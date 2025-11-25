@@ -1,5 +1,3 @@
-version: "3.3"
-
 services:
   planner-db:
     image: 'postgres:18.1'
