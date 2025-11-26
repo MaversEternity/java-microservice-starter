@@ -32,7 +32,7 @@ public class TaskServiceImpl implements TaskService {
     public TaskRs update(Long id, TaskRq rq) {
         TaskEntity task = taskDbService.getById(id);
         taskMapper.update(task, rq);
-        TaskEntity saved = taskDbService.save(taskMapper.to(rq));
+        TaskEntity saved = taskDbService.save(task);
         return taskMapper.to(saved);
     }
 
