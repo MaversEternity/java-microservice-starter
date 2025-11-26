@@ -3,9 +3,6 @@ databaseChangeLog:
       id: v1.0.0_202511160129_create_task_table
       author: maxmavers@gmail.com
       changes:
-        - sqlFile:
-            path: db/changelog/v1.0.0/import/add-task-state-type.sql
-            splitStatements: false
         - createSequence:
             sequenceName: task_id_seq
             cycle: false
@@ -36,7 +33,7 @@ databaseChangeLog:
                   remarks: Task description
               - column:
                   name: state
-                  type: task_state
+                  type: varchar
                   remarks: Task state
                   constraints:
                     nullable: false

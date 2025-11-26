@@ -21,6 +21,7 @@ public class TaskServiceImpl implements TaskService {
     private final TaskDbService taskDbService;
     private final TaskMapper taskMapper;
 
+    @Transactional
     @Override
     public TaskRs create(TaskRq rq) {
         TaskEntity saved = taskDbService.save(taskMapper.to(rq));
@@ -36,11 +37,13 @@ public class TaskServiceImpl implements TaskService {
         return taskMapper.to(saved);
     }
 
+    @Transactional
     @Override
     public List<TaskRs> findAll() {
         return taskMapper.to(taskDbService.findAll().stream());
     }
 
+    @Transactional
     @Override
     public TaskRs getById(Long id) {
         return taskMapper.to(taskDbService.getById(id));
