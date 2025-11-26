@@ -50,12 +50,12 @@ public abstract class BaseDbService<E, I> {
     }
 
     @Transactional(isolation = Isolation.REPEATABLE_READ)
-    public <T> T execute(Supplier<T> task) {
+    public <T> T withTransaction(Supplier<T> task) {
         return task.get();
     }
 
     @Transactional(isolation = Isolation.REPEATABLE_READ)
-    public void execute(Runnable task) {
+    public void withTransaction(Runnable task) {
         task.run();
     }
 

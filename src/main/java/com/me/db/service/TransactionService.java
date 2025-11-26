@@ -4,8 +4,8 @@ import java.util.function.Supplier;
 
 public interface TransactionService {
 
-    <T> T execute(Supplier<T> task);
+    <T> T withTransaction(Supplier<T> task);
 
-     void execute(Runnable task);
+     void withTransaction(Runnable task);
 
 }

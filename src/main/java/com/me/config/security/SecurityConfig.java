@@ -40,9 +40,11 @@ public class SecurityConfig {
 
         SecurityContextRepository securityContextRepository = new RequestAttributeSecurityContextRepository();
 
-        http.authorizeHttpRequests(ahr -> ahr.anyRequest().authenticated())
+        http
+            .authorizeHttpRequests(ahr -> ahr.anyRequest().authenticated())
             .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .csrf(AbstractHttpConfigurer::disable).cors(Customizer.withDefaults())
+            .csrf(AbstractHttpConfigurer::disable)
+            .cors(Customizer.withDefaults())
             .securityContext(sc -> sc.securityContextRepository(securityContextRepository))
             .exceptionHandling(eh -> eh.authenticationEntryPoint(authenticationEntryPoint))
             .addFilterBefore(new LoggingFilterImpl(loggingFormat), BasicAuthenticationFilter.class)
@@ -60,8 +62,15 @@ public class SecurityConfig {
     public WebSecurityCustomizer webSecurityCustomizer() {
 
         return web -> web.ignoring()
-            .requestMatchers("/public/**", "/swagger-ui/**", "/contract/async/**", "/swagger-ui.html", "/swagger-resources/**",
-                "/v2/api-docs", "/v3/api-docs/**");
+            .requestMatchers(
+                "/public/**",
+                "/swagger-ui/**",
+                "/contract/async/**",
+                "/swagger-ui.html",
+                "/swagger-resources/**",
+                "/v2/api-docs",
+                "/v3/api-docs/**"
+            );
     }
 
 }

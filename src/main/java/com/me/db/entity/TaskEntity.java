@@ -58,7 +58,7 @@ public class TaskEntity extends UpdatableEntity {
 
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "assigned_by", referencedColumnName = "id", updatable = false)
+    @JoinColumn(name = "assigned_by", referencedColumnName = "id")
     private PersonEntity assignee;
 
     @Override

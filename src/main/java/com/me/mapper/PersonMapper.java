@@ -19,6 +19,6 @@ public interface PersonMapper {
 
     PersonEntity to(PersonRq rq);
 
-    PersonEntity update(@MappingTarget PersonEntity entity, PersonRq task);
+    PersonEntity update(@MappingTarget PersonEntity entity, PersonRq rq);
 
 }

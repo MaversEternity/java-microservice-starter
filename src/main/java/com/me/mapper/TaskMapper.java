@@ -11,9 +11,12 @@ import com.me.db.entity.TaskEntity;
 import com.me.transport.controller.model.TaskRq;
 import com.me.transport.controller.model.TaskRs;
 
-@Mapper(componentModel = "spring", uses = {JpaRefMapper.class})
+@Mapper(componentModel = "spring", uses = {JpaRefMapper.class, PersonMapper.class})
 public interface TaskMapper {
 
+    @Mapping(target = "assignedBy", source = "assignee")
+    @Mapping(target = "lastCreatedBy", source = "creator")
+    @Mapping(target = "lastUpdatedBy", source = "updater")
     TaskRs to(TaskEntity task);
 
     List<TaskRs> to(Stream<TaskEntity> task);
