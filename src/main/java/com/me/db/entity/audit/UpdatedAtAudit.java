@@ -4,8 +4,8 @@ import java.time.LocalDateTime;
 
 public interface UpdatedAtAudit {
 
-  UpdatedAtAudit setModifiedAt(LocalDateTime time);
+    UpdatedAtAudit setUpdatedAt(LocalDateTime time);
 
-  boolean isWasModifiedByStrictAction();
+    boolean isWasModifiedByStrictAction();
 
 }

@@ -9,7 +9,7 @@ public interface UpdatedByAudit {
 
     UpdatedByAudit setUpdater(PersonEntity updater);
 
-    boolean isWasUpdatedByStrictAction();
+    boolean isWasModifiedByStrictAction();
 
     boolean isNew();
 }

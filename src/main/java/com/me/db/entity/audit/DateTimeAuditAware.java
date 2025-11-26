@@ -17,7 +17,7 @@ public class DateTimeAuditAware {
   @PreUpdate
   private void setModifiedAt(UpdatedAtAudit audit) {
     if (audit.isWasModifiedByStrictAction()) {
-        audit.setModifiedAt(CurrentTimeProvider.now());
+        audit.setUpdatedAt(CurrentTimeProvider.now());
     }
   }
 

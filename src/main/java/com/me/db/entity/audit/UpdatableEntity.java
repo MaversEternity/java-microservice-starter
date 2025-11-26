@@ -23,7 +23,7 @@ import lombok.experimental.Accessors;
 @Setter
 @Accessors(chain = true)
 @MappedSuperclass
-@EntityListeners({ DateTimeAuditAware.class, UserAuditAware.class})
+@EntityListeners({ DateTimeAuditAware.class, UserAuditAware.class })
 @ToString
 public abstract class UpdatableEntity implements
     IdEntity<Long>,
@@ -64,13 +64,24 @@ public abstract class UpdatableEntity implements
     }
 
     @Override
-    public UpdatableEntity setModifiedAt(LocalDateTime time) {
+    public UpdatableEntity setUpdatedAt(LocalDateTime time) {
         updatedAt = time;
         return this;
     }
 
     @Override
-    public boolean isWasUpdatedByStrictAction() {
+    public UpdatableEntity setCreatedAt(LocalDateTime time) {
+        createdAt = time;
+        return this;
+    }
+
+    @Override
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    @Override
+    public boolean isWasModifiedByStrictAction() {
         return wasModifiedByStrictAction;
     }
 }

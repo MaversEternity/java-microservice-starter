@@ -1,10 +1,10 @@
 package com.me.db.service.impl;
 
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import com.me.db.entity.PersonEntity;
+import com.me.db.repository.PersonRepo;
 import com.me.db.service.PersonDbService;
 import com.me.db.service.SystemUserProvider;
 import com.me.exception.BusinessException;
@@ -16,8 +16,8 @@ public class PersonDbServiceImpl extends BaseDbService<PersonEntity, Long> imple
 
     private static final Long SYSTEM_USER_ID = 0L;
 
-    public PersonDbServiceImpl(JpaRepository<PersonEntity, Long> repository) {
-        super(repository);
+    public PersonDbServiceImpl(PersonRepo repo) {
+        super(repo);
     }
 
     @Cacheable(SYSTEM_USER_ID_CACHE)

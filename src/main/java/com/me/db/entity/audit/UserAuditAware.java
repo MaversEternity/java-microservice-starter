@@ -33,7 +33,7 @@ public class UserAuditAware {
 
   @PreUpdate
   private void setUpdater(UpdatedByAudit audit) {
-    if (!audit.isNew() && audit.isWasUpdatedByStrictAction()) {
+    if (!audit.isNew() && audit.isWasModifiedByStrictAction()) {
         SecurityUtils.findAuthContext().ifPresentOrElse(
             user -> audit.setUpdater(jpaRefMapper.createProxy(user.localId(), PersonEntity.class)),
             () -> audit.setUpdater(jpaRefMapper.createProxy(systemUserProvider.getSystemId(), PersonEntity.class))
