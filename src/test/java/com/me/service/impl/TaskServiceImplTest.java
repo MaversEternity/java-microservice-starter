@@ -14,8 +14,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.me.db.entity.TaskEntity;
 import com.me.db.service.TaskDbService;
 import com.me.mapper.TaskMapper;
-import com.me.transport.controller.model.TaskRq;
-import com.me.transport.controller.model.TaskRs;
+import com.me.transport.http.model.TaskRq;
+import com.me.transport.http.model.TaskRs;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;

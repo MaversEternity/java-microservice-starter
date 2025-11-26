@@ -7,8 +7,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 
 import com.me.db.entity.PersonEntity;
-import com.me.transport.controller.model.PersonRq;
-import com.me.transport.controller.model.PersonRs;
+import com.me.transport.http.model.PersonRq;
+import com.me.transport.http.model.PersonRs;
 
 @Mapper(componentModel = "spring")
 public interface PersonMapper {

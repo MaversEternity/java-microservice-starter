@@ -9,8 +9,8 @@ import com.me.db.entity.TaskEntity;
 import com.me.db.service.TaskDbService;
 import com.me.mapper.TaskMapper;
 import com.me.service.TaskService;
-import com.me.transport.controller.model.TaskRq;
-import com.me.transport.controller.model.TaskRs;
+import com.me.transport.http.model.TaskRq;
+import com.me.transport.http.model.TaskRs;
 
 import lombok.RequiredArgsConstructor;
 

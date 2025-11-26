@@ -1,4 +1,4 @@
-package com.me.transport.controller;
+package com.me.transport.http;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,9 +23,9 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import com.me.exception.BusinessException;
 import com.me.exception.ErrorCode;
-import com.me.transport.controller.model.ErrorRs;
-import com.me.transport.controller.model.ErrorValidationRs;
-import com.me.transport.controller.model.Rs;
+import com.me.transport.http.model.ErrorRs;
+import com.me.transport.http.model.ErrorValidationRs;
+import com.me.transport.http.model.Rs;
 import com.me.util.JsonUtils;
 
 import jakarta.servlet.http.HttpServletRequest;

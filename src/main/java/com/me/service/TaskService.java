@@ -2,8 +2,8 @@ package com.me.service;
 
 import java.util.List;
 
-import com.me.transport.controller.model.TaskRq;
-import com.me.transport.controller.model.TaskRs;
+import com.me.transport.http.model.TaskRq;
+import com.me.transport.http.model.TaskRs;
 
 public interface TaskService {
 

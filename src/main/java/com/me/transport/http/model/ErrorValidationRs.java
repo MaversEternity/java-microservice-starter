@@ -1,4 +1,4 @@
-package com.me.transport.controller.model;
+package com.me.transport.http.model;
 
 import com.me.exception.ErrorCode;
 

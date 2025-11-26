@@ -1,5 +1,5 @@
 
-package com.me.transport.controller;
+package com.me.transport.http;
 
 import java.util.List;
 
@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.me.service.TaskService;
-import com.me.transport.controller.model.TaskRq;
-import com.me.transport.controller.model.TaskRs;
+import com.me.transport.http.model.TaskRq;
+import com.me.transport.http.model.TaskRs;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

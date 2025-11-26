@@ -8,8 +8,8 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
 import com.me.db.entity.TaskEntity;
-import com.me.transport.controller.model.TaskRq;
-import com.me.transport.controller.model.TaskRs;
+import com.me.transport.http.model.TaskRq;
+import com.me.transport.http.model.TaskRs;
 
 @Mapper(componentModel = "spring", uses = {JpaRefMapper.class, PersonMapper.class})
 public interface TaskMapper {

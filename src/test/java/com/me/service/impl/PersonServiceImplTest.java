@@ -11,8 +11,8 @@ import com.me.SecurityMock;
 import com.me.db.entity.PersonEntity;
 import com.me.db.service.PersonDbService;
 import com.me.mapper.PersonMapper;
-import com.me.transport.controller.model.PersonRq;
-import com.me.transport.controller.model.PersonRs;
+import com.me.transport.http.model.PersonRq;
+import com.me.transport.http.model.PersonRs;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;

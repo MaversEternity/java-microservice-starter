@@ -1,4 +1,4 @@
-package com.me.transport.controller;
+package com.me.transport.http;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.me.service.PersonService;
-import com.me.transport.controller.model.PersonRq;
-import com.me.transport.controller.model.PersonRs;
+import com.me.transport.http.model.PersonRq;
+import com.me.transport.http.model.PersonRs;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
