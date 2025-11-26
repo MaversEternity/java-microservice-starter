@@ -10,16 +10,14 @@ import com.me.util.SecurityUtils;
 
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 @Component
-@NoArgsConstructor
-@AllArgsConstructor(onConstructor_ = @Lazy)
+@RequiredArgsConstructor(onConstructor = @__(@Lazy))
 public class UserAuditAware {
 
-  private SystemUserProvider systemUserProvider;
-  private JpaRefMapper jpaRefMapper;
+  private final SystemUserProvider systemUserProvider;
+  private final JpaRefMapper jpaRefMapper;
 
   @PrePersist
   private void setCreator(CreatedByAudit audit) {

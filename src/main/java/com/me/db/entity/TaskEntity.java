@@ -36,7 +36,6 @@ import lombok.experimental.Accessors;
 public class TaskEntity extends UpdatableEntity {
 
     @Id
-    @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
