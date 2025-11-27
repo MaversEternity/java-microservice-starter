@@ -78,7 +78,7 @@ public class DiffUtils {
      * @param <O> Old type
      * @param <N> New type
      */
-    private record DiffContainer<O, N>(List<Diff<O, N>> diffList) {
+    public record DiffContainer<O, N>(List<Diff<O, N>> diffList) {
 
         /**
          * @return Find records to create
@@ -111,16 +111,16 @@ public class DiffUtils {
         }
     }
 
-    private sealed interface Diff<O, N> permits CreateDiff, DeleteDiff, UpdateDiff {
+    public sealed interface Diff<O, N> permits CreateDiff, DeleteDiff, UpdateDiff {
         O oldValue();
         N newValue();
     }
 
-    private record UpdateDiff<O, N>(O oldValue, N newValue) implements Diff<O, N> {
+    public record UpdateDiff<O, N>(O oldValue, N newValue) implements Diff<O, N> {
 
     }
 
-    private record CreateDiff<O, N>(N newValue) implements Diff<O, N> {
+    public record CreateDiff<O, N>(N newValue) implements Diff<O, N> {
 
         @Nullable
         @Override
@@ -129,7 +129,7 @@ public class DiffUtils {
         }
     }
 
-    private record DeleteDiff<O, N>(O oldValue) implements Diff<O, N> {
+    public record DeleteDiff<O, N>(O oldValue) implements Diff<O, N> {
 
         @Nullable
         @Override
