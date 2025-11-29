@@ -59,6 +59,10 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
         <dependency>
@@ -250,6 +254,20 @@
     </build>
 
     <profiles>
+        <profile>
+            <id>migrations</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.liquibase</groupId>
+                        <artifactId>liquibase-maven-plugin</artifactId>
+                        <configuration>
+                            <propertyFile>application.yml</propertyFile>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
         <profile>
             <id>dependency-check</id>
             <build>
